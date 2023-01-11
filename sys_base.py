@@ -47,4 +47,4 @@ def update_user(new_valor):
     return redirect('/')
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='170.239.85.51', port=5000)

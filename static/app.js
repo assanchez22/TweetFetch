@@ -10,8 +10,7 @@ setInterval(function() {
     if (tweetIndex >= tweets.length) {
         tweetIndex = 0;
         window.location.reload();
-        
     }
 
     tweets[tweetIndex].style.display = "block";
-}, 15000);
+}, 5000);

@@ -1,8 +1,12 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 import tweepy
 import re
 
-user_fetch = "Agus"
+user_fetch = "cryptob_chain"
+
+user_auth = "admin"
+
+pass_auth = "admin"
 
 urls = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 
@@ -39,12 +43,22 @@ def index():
 
     return render_template('index.html', tweets=datos_front, image_url=image_url, name=name, screen_name=screen_name)
 
-@app.route("/update_user/<new_valor>", methods=["GET"])
-def update_user(new_valor):
+@app.route("/update_user/<user_valor>:<pass_valor>/<new_valor>", methods=["GET"])
+def update_user(new_valor, user_valor, pass_valor):
     global user_fetch
-    user_fetch = new_valor
 
-    return redirect('/')
+    if user_valor == user_auth and pass_valor == pass_auth:
+        user_fetch = new_valor
+
+        return redirect('/')
+
+@app.route("/<path:path>")
+def catch_all(path):
+    return redirect(url_for("index"))
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html'), 500
 
 if __name__ == "__main__":
-    app.run(host='170.239.85.51', port=5000)
+    app.run(host='0.0.0.0', port=5000)

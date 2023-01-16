@@ -6,7 +6,7 @@ user_fetch = "cryptob_chain"
 
 user_auth = "admin"
 
-pass_auth = "admin"
+pass_auth = "8afD44k6jYy3uqSR"
 
 urls = r'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
 
@@ -39,8 +39,6 @@ def index():
         else:
             datos_front.append([cleaned_text])
 
-    print(name, screen_name)
-
     return render_template('index.html', tweets=datos_front, image_url=image_url, name=name, screen_name=screen_name)
 
 @app.route("/update_user/<user_valor>:<pass_valor>/<new_valor>", methods=["GET"])
@@ -61,4 +59,4 @@ def internal_server_error(error):
     return render_template('500.html'), 500
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=3000)
